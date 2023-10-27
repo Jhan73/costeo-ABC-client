@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterModule } from './shared/footer/footer.module';
 import { HeaderModule } from './shared/header/header.module';
 import { MenuBarModule } from './shared/menu-bar/menu-bar.module';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { RegisterComponent } from './auth/pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { MenuBarModule } from './shared/menu-bar/menu-bar.module';
     LoginComponent,
     ForgotComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LandingPageComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

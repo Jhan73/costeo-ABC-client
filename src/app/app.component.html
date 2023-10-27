@@ -1,6 +1,11 @@
-<app-header></app-header>
-<app-menu-bar></app-menu-bar>
-<section>
-  <router-outlet></router-outlet>
+<section *ngIf="isLoged; else notLoged">
+  <app-header></app-header>
+  <app-menu-bar></app-menu-bar>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
 </section>
+<ng-template #notLoged>
+  <app-landing-page></app-landing-page>
+</ng-template>
 <!-- <app-footer></app-footer> -->
