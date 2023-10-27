@@ -13,6 +13,12 @@ import { HeaderModule } from './shared/header/header.module';
 import { MenuBarModule } from './shared/menu-bar/menu-bar.module';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { RegisterComponent } from './auth/pages/register/register.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import {NgIf} from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,8 +37,15 @@ import { RegisterComponent } from './auth/pages/register/register.component';
     HeaderModule,
     MenuBarModule,
     FooterModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule, MatInputModule, NgIf,ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  hide = true;
+ }
