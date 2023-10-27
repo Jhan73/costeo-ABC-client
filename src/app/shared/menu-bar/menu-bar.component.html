@@ -1,0 +1,31 @@
+<div>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <button class="menu-button" mat-button [matMenuTriggerFor]="elementsMenu">Elementos</button>
+            <mat-menu #elementsMenu="matMenu">
+                <a class="nav-link" mat-menu-item href="site/elements/activities">Actividades</a>
+                <a class="nav-link" mat-menu-item href="site/elements/cost-centers">Centros de costo</a>
+                <a class="nav-link" mat-menu-item href="site/elements/products">Productos</a>
+                <a class="nav-link" mat-menu-item href="site/elements/resources">Recurso</a>
+            </mat-menu>
+        </li>
+        <li class="nav-item">
+            <button class="menu-button" mat-button [matMenuTriggerFor]="relationsMenu">Relaciones</button>
+            <mat-menu #relationsMenu="matMenu">
+                <a class="nav-link" mat-menu-item href="site/relations/activity-product">Actividad - Producto</a>
+                <a class="nav-link" mat-menu-item href="site/relations/cost-center-resource">Centro de costo - Recurso</a>
+                <a class="nav-link" mat-menu-item href="site/relations/material-labor">Material - Mano de obra</a>
+                <a class="nav-link" mat-menu-item href="site/relations/resource-activity">Recurso - Actividad</a>
+            </mat-menu>
+        </li>
+        <li class="nav-item">
+            <button class="menu-button" mat-button [matMenuTriggerFor]="analysisMenu">Analisis</button>
+            <mat-menu #analysisMenu="matMenu">
+                <a class="nav-link" mat-menu-item href="site/analysis/view-analysis" routerLinkActive="nav-active">Ver
+                    analisis</a>
+                <a class="nav-link" mat-menu-item href="site/analysis/generate-report"
+                    routerLinkActive="nav-active">Generar reporte</a>
+            </mat-menu>
+        </li>
+    </ul>
+</div>
