@@ -7,7 +7,8 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { CostCentersComponent } from './pages/cost-centers/cost-centers.component';
 import { ResourcesComponent } from './pages/resources/resources.component';
-
+import { BaseTableModule } from 'src/app/shared/base/components/base-table/base-table.module';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { ResourcesComponent } from './pages/resources/resources.component';
   ],
   imports: [
     CommonModule,
-    ElementsRoutingModule
+    ElementsRoutingModule,
+    BaseTableModule,
+    MatInputModule,
   ]
 })
 export class ElementsModule { }

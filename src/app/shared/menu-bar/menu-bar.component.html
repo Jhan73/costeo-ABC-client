@@ -1,7 +1,14 @@
 <div>
     <ul class="navbar-nav">
         <li class="nav-item">
-            <button class="menu-button" mat-button [matMenuTriggerFor]="elementsMenu">Elementos</button>
+            <button class="menu-button" mat-button [matMenuTriggerFor]="elementsMenu">
+                <mat-icon class="material-symbols-outlined">
+                    expand_more
+                </mat-icon>
+                <span>
+                    Elementos 
+                </span>
+            </button>
             <mat-menu #elementsMenu="matMenu">
                 <a class="nav-link" mat-menu-item href="site/elements/activities">Actividades</a>
                 <a class="nav-link" mat-menu-item href="site/elements/cost-centers">Centros de costo</a>
@@ -10,7 +17,12 @@
             </mat-menu>
         </li>
         <li class="nav-item">
-            <button class="menu-button" mat-button [matMenuTriggerFor]="relationsMenu">Relaciones</button>
+            <button class="menu-button" mat-button [matMenuTriggerFor]="relationsMenu">
+                Relaciones
+                <mat-icon class="material-symbols-outlined">
+                    expand_more
+                </mat-icon>
+            </button>
             <mat-menu #relationsMenu="matMenu">
                 <a class="nav-link" mat-menu-item href="site/relations/activity-product">Actividad - Producto</a>
                 <a class="nav-link" mat-menu-item href="site/relations/cost-center-resource">Centro de costo - Recurso</a>
@@ -19,7 +31,12 @@
             </mat-menu>
         </li>
         <li class="nav-item">
-            <button class="menu-button" mat-button [matMenuTriggerFor]="analysisMenu">Analisis</button>
+            <button class="menu-button" mat-button [matMenuTriggerFor]="analysisMenu">
+                Analisis
+                <mat-icon class="material-symbols-outlined">
+                    expand_more
+                </mat-icon>
+            </button>
             <mat-menu #analysisMenu="matMenu">
                 <a class="nav-link" mat-menu-item href="site/analysis/view-analysis" routerLinkActive="nav-active">Ver
                     analisis</a>
