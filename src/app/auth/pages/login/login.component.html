@@ -4,36 +4,32 @@
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card shadow-2-strong" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
-  
-              <h1 class="mb-5">Inicia sesión</h1>
-  
+              <h1 class="mb-5">Iniciar sesión</h1>
+              <p>
                 <mat-form-field>
                   <mat-label>Enter your email</mat-label>
                   <input matInput placeholder="pat@example.com" [formControl]="email" required>
                   <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                  <mat-icon matSuffix>mail_outline</mat-icon>
                 </mat-form-field>
-
-              <mat-form-field>
-                <mat-label>Enter your password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-              </mat-form-field>
-  
-              
-              <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-start mb-4">
-                <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-                <label class="form-check-label" for="form1Example3"> Recordarme </label>
-              </div>
-  
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-  
+              </p>
+              <p>
+                <mat-form-field>
+                  <mat-label>Enter your password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-checkbox class="example-margin">Recordarme</mat-checkbox>
+              </p>
+              <p>
+                <button mat-raised-button color="primary">Ingresar</button>
+              </p>
               <hr class="my-4">
-  
               <p>¿No tienes cuenta? <a href="register" class="link-info">Registrate aquí</a></p>
-  
             </div>
           </div>
         </div>

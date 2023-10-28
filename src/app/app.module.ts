@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import {NgIf} from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule, MatInputModule, NgIf,ReactiveFormsModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
