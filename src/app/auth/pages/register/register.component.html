@@ -5,43 +5,61 @@
           <div class="card shadow-2-strong" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
   
-              <h1 class="mb-5">Registrate</h1>
-  
-              <div class="form-outline mb-4">
-                <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
-                <label class="form-label" for="typeEmailX-2">Nombres</label>
-              </div>
+              <h1 class="mb-5">Crear nueva cuenta</h1>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput placeholder="Placeholder">
+                  <mat-icon matSuffix>perm_identity</mat-icon>
+                  <mat-hint>Ingrese su nombre</mat-hint>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Apellidos</mat-label>
+                  <input matInput placeholder="Placeholder">
+                  <mat-icon matSuffix>portrait</mat-icon>
+                  <mat-hint>Ingrese sus apellidos</mat-hint>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Correo</mat-label>
+                  <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                  <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                  <mat-icon matSuffix>mail_outline</mat-icon>
+                  <mat-hint>Ingrese su correo</mat-hint>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-hint>Ingrese su contraseña</mat-hint>
+                </mat-form-field>
+              </p>
 
-              <div class="form-outline mb-4">
-                <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
-                <label class="form-label" for="typeEmailX-2">Apellidos</label>
-              </div>
-
-              <div class="form-outline mb-4">
-                <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
-                <label class="form-label" for="typeEmailX-2">Email</label>
-              </div>
-                
-              <div class="form-outline mb-4">
-                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
-                <label class="form-label" for="typePasswordX-2">Contraseña</label>
-              </div>
-
-              <div class="form-outline mb-4">
-                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
-                <label class="form-label" for="typePasswordX-2">Ingresa nuevamente la contraseña</label>
-              </div>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-hint>Ingrese nuevamente su contraseña</mat-hint>
+                </mat-form-field>
+              </p>
   
               <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-start mb-4">
-                <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-                <label class="form-check-label" for="form1Example3"> He leído y acepto las condiciones </label>
-              </div>
-  
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Registrar</button>
-  
+              <section class="example-section">
+                <mat-checkbox class="example-margin">He leído y acepto las condiciones</mat-checkbox>
+              </section>
+              <button mat-raised-button color="primary">Registrar</button>
               <hr class="my-4">
-  
+              <p>¿Ya tienes cuenta? <a href="login" class="link-info">Ingresa aquí</a></p>
             </div>
           </div>
         </div>
