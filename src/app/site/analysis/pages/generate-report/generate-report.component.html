@@ -1,1 +1,32 @@
-<p>generate-report works!</p>
+<!--    
+    Mostrar esta parte mientras el usuario no tenga que hacer ninguna acción.
+    Sino, ocultarla-->
+<mat-card>
+    <mat-card-header>
+        <p>Generando reporte</p>
+    </mat-card-header>
+    <mat-card-content>
+        Espere por favor
+    </mat-card-content>
+    <mat-card-footer>
+        <mat-progress-bar mode="determinate" value="40">
+        </mat-progress-bar>
+    </mat-card-footer>
+</mat-card>
+
+<!--
+    Mostrar esta parte si el usuario debe precisar Criterios de Reparto para Costos Indirectos
+    (solo en caso de que algunos CI no tengan sus CR definidos)
+-->
+<mat-card>
+    <mat-card-header>
+        <p>Por favor no se vaya!</p>
+    </mat-card-header>
+    <mat-card-content>
+        Indíquenos los criterios de reparto para cada uno de estos Costos Indirectos:
+        <br/>
+
+        <app-table-ic-dc/>
+          
+    </mat-card-content>
+</mat-card>

@@ -1,1 +1,68 @@
-<p>register works!</p>
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+  
+              <h1 class="mb-5">Crear nueva cuenta</h1>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput placeholder="Placeholder">
+                  <mat-icon matSuffix>perm_identity</mat-icon>
+                  <mat-hint>Ingrese su nombre</mat-hint>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Apellidos</mat-label>
+                  <input matInput placeholder="Placeholder">
+                  <mat-icon matSuffix>portrait</mat-icon>
+                  <mat-hint>Ingrese sus apellidos</mat-hint>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Correo</mat-label>
+                  <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                  <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                  <mat-icon matSuffix>mail_outline</mat-icon>
+                  <mat-hint>Ingrese su correo</mat-hint>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-hint>Ingrese su contraseña</mat-hint>
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-hint>Ingrese nuevamente su contraseña</mat-hint>
+                </mat-form-field>
+              </p>
+  
+              <!-- Checkbox -->
+              <section class="example-section">
+                <mat-checkbox class="example-margin">He leído y acepto las condiciones</mat-checkbox>
+              </section>
+              <button mat-raised-button color="primary">Registrar</button>
+              <hr class="my-4">
+              <p>¿Ya tienes cuenta? <a href="login" class="link-info">Ingresa aquí</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
