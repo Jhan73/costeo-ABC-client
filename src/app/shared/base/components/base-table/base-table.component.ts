@@ -105,6 +105,7 @@ export class BaseTableComponent implements AfterViewInit, OnInit {
   openDialog(){
     this.matDialog.open(BaseFormModalComponent, {
       width: '350px',
+      height: '400px'
     })
 
   }
