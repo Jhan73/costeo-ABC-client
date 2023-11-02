@@ -1,38 +1,31 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-    
-
-    <!--ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
-      <th mat-header-cell *matHeaderCellDef>
-        {{col.label}}
-      </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-form-field>
-          <input [type]="col.type" matInput [(ngModel)]="element[col.key]">
-        </mat-form-field>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr-->
-
-    <!-- Name Column -->
     <ng-container matColumnDef="indirectcost">
       <th mat-header-cell *matHeaderCellDef> Costo Indirecto </th>
       <td mat-cell *matCellDef="let element"> {{element.indirectcost}} </td>
     </ng-container>
-  
-    <!-- Weight Column -->
+
     <ng-container matColumnDef="distributioncriteria">
       <th mat-header-cell *matHeaderCellDef> Criterio de Reparto </th>
-      <td mat-cell *matCellDef="let element"> {{element.distributioncriteria}} </td>
+      <td mat-cell *matCellDef="let element">
+        <mat-select>
+          <mat-option *ngFor="let dc of distributioncriterias" [value]="dc.tag">
+            {{dc.tag}}
+          </mat-option>
+          <mat-option>Nuevo Criterio de Reparto</mat-option>
+        </mat-select>
+      </td>
     </ng-container>
-  
-    <!-- Symbol Column -->
+
     <ng-container matColumnDef="ressourcetype">
       <th mat-header-cell *matHeaderCellDef> Tipo de Recurso </th>
-      <td mat-cell *matCellDef="let element"> {{element.ressourcetype}} </td>
+      <td mat-cell *matCellDef="let element">
+        <mat-select>
+          <mat-option *ngFor="let rt of ressourcetypes" [value]="rt.tag">
+            {{rt.tag}}
+          </mat-option>
+        </mat-select>
+      </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

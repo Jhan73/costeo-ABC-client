@@ -9,24 +9,29 @@ import { GenerateReportComponent } from './pages/generate-report/generate-report
 import { MatCardModule } from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTableModule} from '@angular/material/table';
-import { TableIcDcComponent } from './pages/generate-report/table-ic-dc/table-ic-dc.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { TableIcDcComponent } from './pages/generate-report/table-ic-dc/table-ic-dc.component';
+import { TableSicDistributionComponent } from './pages/generate-report/table-sic-distribution/table-sic-distribution.component';
+import { TableSupicDistributionComponent } from './pages/generate-report/table-supic-distribution/table-supic-distribution.component';
+import { TableOicDistributionComponent } from './pages/generate-report/table-oic-distribution/table-oic-distribution.component';
 
 @NgModule({
-  declarations: [
-    AnalysisComponent,
-    ViewAnalysisComponent,
-    GenerateReportComponent,
-  ],
-  imports: [
-    CommonModule,
-    AnalysisRoutingModule,
-    MatCardModule,
-    MatProgressBarModule,
-    MatTableModule,
-    TableIcDcComponent,
-    MatFormFieldModule
-  ]
+    declarations: [
+        AnalysisComponent,
+        ViewAnalysisComponent,
+        GenerateReportComponent
+    ],
+    imports: [
+        CommonModule,
+        AnalysisRoutingModule,
+        MatCardModule,
+        MatProgressBarModule,
+        MatTableModule,
+        MatFormFieldModule,
+        TableIcDcComponent,
+        TableSicDistributionComponent,
+        TableSupicDistributionComponent,
+        TableOicDistributionComponent
+    ]
 })
 export class AnalysisModule { }

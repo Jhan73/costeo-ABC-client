@@ -9,8 +9,9 @@
         Espere por favor
     </mat-card-content>
     <mat-card-footer>
-        <mat-progress-bar mode="determinate" value="40">
-        </mat-progress-bar>
+        <mat-progress-bar mode="determinate" value="40"/>
+        <br/>
+        <mat-progress-bar mode="indeterminate"/>
     </mat-card-footer>
 </mat-card>
 
@@ -25,8 +26,48 @@
     <mat-card-content>
         Indíquenos los criterios de reparto para cada uno de estos Costos Indirectos:
         <br/>
-
         <app-table-ic-dc/>
-          
+    </mat-card-content>
+</mat-card>
+
+<!--
+    
+-->
+<mat-card>
+    <mat-card-header>
+        <p>Un detalle más, por favor:</p>
+    </mat-card-header>
+    <mat-card-content>
+        Indíquenos cuánto se usa cada Costo Indirecto horizontal para cada uno de los Costos Indirectos verticales:
+        <br/>
+        <app-table-sic-distribution/>
+    </mat-card-content>
+</mat-card>
+
+<!--
+    
+-->
+<mat-card>
+    <mat-card-header>
+        <p>Vamos a la mitad:</p>
+    </mat-card-header>
+    <mat-card-content>
+        Indíquenos cuánto se usa cada Costo Indirecto horizontal para cada uno de los Costos Indirectos verticales:
+        <br/>
+        <app-table-supic-distribution/>
+    </mat-card-content>
+</mat-card>
+
+<!--
+    
+-->
+<mat-card>
+    <mat-card-header>
+        <p>Lo último:</p>
+    </mat-card-header>
+    <mat-card-content>
+        Indíquenos cuánto se usa cada Costo Indirecto horizontal para cada una de las Actividades:
+        <br/>
+        <app-table-oic-distribution/>
     </mat-card-content>
 </mat-card>

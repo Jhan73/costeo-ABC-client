@@ -1,0 +1,58 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="indirectcost">
+      <th mat-header-cell *matHeaderCellDef> Costo Indirecto de Apoyo </th>
+      <td mat-cell *matCellDef="let element"> {{element.supportindirectcost}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="distributioncriteria">
+      <th mat-header-cell *matHeaderCellDef> Criterio de Reparto </th>
+      <td mat-cell *matCellDef="let element"> {{element.criteria}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CIO1">
+      <th mat-header-cell *matHeaderCellDef> CIO1 </th>
+      <td mat-cell *matCellDef="let element">
+        <input matInput type="number" value="0"/>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CIO2">
+      <th mat-header-cell *matHeaderCellDef> CIO2 </th>
+      <td mat-cell *matCellDef="let element">
+        <input matInput type="number" value="0"/>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CIO3">
+      <th mat-header-cell *matHeaderCellDef> CIO3 </th>
+      <td mat-cell *matCellDef="let element">
+        <input matInput type="number" value="0"/>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CIO4">
+      <th mat-header-cell *matHeaderCellDef> CIO4 </th>
+      <td mat-cell *matCellDef="let element">
+        <input matInput type="number" value="0"/>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CIO5">
+      <th mat-header-cell *matHeaderCellDef> CIO5 </th>
+      <td mat-cell *matCellDef="let element">
+        <input matInput type="number" value="0"/>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CIO6">
+      <th mat-header-cell *matHeaderCellDef> CIO6 </th>
+      <td mat-cell *matCellDef="let element">
+        <input matInput type="number" value="0"/>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
