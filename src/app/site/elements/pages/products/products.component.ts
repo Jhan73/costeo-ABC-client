@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { TableColumn } from 'src/app/models/table-column.model';
 import { TableConfig } from 'src/app/models/table-config.model';
+import { ModalDialogComponent } from 'src/app/shared/base/components/modal-dialog/modal-dialog.component';
+import { DialogService } from 'src/app/shared/base/services/dialog.service';
 
 export interface Product{
   code: string;
@@ -41,7 +45,35 @@ export class ProductsComponent implements OnInit {
   statusTableRowFrom: string = 'INVALID'
 
   //------------------------------------
+//************************************************** */
+
+title = 'dialog-reutilizable';
+
+  formGroup: FormGroup = new FormGroup({
+    name: new FormControl(),
+    lastname: new FormControl(),
+  });
+  private matDialogRef!: MatDialogRef<ModalDialogComponent>;
   
+  constructor(private dialogService: DialogService){
+    
+  }
+  openDialogWithTemplate(template: TemplateRef<any>) {
+    this.matDialogRef = this.dialogService.openFormDialog(
+      template
+    );
+    
+    this.matDialogRef.afterClosed().subscribe((res) => {
+      console.log('Dialog With Template Close', res);
+      this.formGroup.reset();
+    });
+  }
+  guardar() {
+    console.log(this.formGroup.value);
+    this.formGroup.reset();
+    this.matDialogRef.close();
+  }
+
   ngOnInit(): void {
     this.setColums()
   }
@@ -56,4 +88,10 @@ export class ProductsComponent implements OnInit {
       { def: 'description', title: 'Descripción', dataKey: 'description' },
     ]
   }
+
+
+  openDialog(){
+    this.dialogService.openDialog({title: 'Titulito', content: 'Contenido'})
+  }
+
 }

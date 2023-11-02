@@ -11,6 +11,8 @@ import { BaseTableModule } from 'src/app/shared/base/components/base-table/base-
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BaseFormModalModule } from 'src/app/shared/base/components/base-form-modal/base-form-modal.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -25,10 +27,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ElementsRoutingModule,
     BaseTableModule,
+    BaseFormModalModule,
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
   ]
 })
 export class ElementsModule { }

@@ -4,10 +4,11 @@ import { BaseTableComponent } from './base-table.component';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BaseFormModalModule } from '../base-form-modal/base-form-modal.module';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -22,7 +23,8 @@ import { BaseFormModalModule } from '../base-form-modal/base-form-modal.module';
     MatButtonModule,
     MatFormFieldModule,
     MatDialogModule,
-    BaseFormModalModule
+    BaseFormModalModule,
+    MatInputModule,
   ],
   exports: [
     BaseTableComponent,

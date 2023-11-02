@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { INPUT_TYPE } from 'src/app/enums/input_type.enum';
+import { TABLE_ACTION } from 'src/app/enums/table-action.enum';
+import { Activity } from 'src/app/models/activity.model';
+import { TableAction } from 'src/app/models/table-action.model';
 import { TableColumn } from 'src/app/models/table-column.model';
 import { TableConfig } from 'src/app/models/table-config.model';
+import { BaseFormModalComponent } from 'src/app/shared/base/components/base-form-modal/base-form-modal.component';
+import { MatDialog } from '@angular/material/dialog'
 
 export interface PeriodicElement {
   name: string;
@@ -31,12 +38,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
   {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
 ];
-export interface Activity {
+export interface ActivityTest {
   code: string;
   name: string;
   description: string;
 }
-const ACTIVITIES: Activity [] = [
+const ACTIVITIES: ActivityTest [] = [
   {code: 'A0001', name: 'Actividad1', description: 'Actividad 1'},
   {code: 'A0002', name: 'Actividad2', description: 'Actividad 2'},
   {code: 'A0003', name: 'Actividad3', description: 'Actividad 3'},
@@ -57,30 +64,94 @@ const ACTIVITIES: Activity [] = [
   styleUrls: ['./activities.component.scss']
 })
 export class ActivitiesComponent implements OnInit {
+
   //============ TABLE =================
   tableColumns: TableColumn[] = [];
-  dataSource: Array<Activity> = ACTIVITIES;
+  dataSource: Array<ActivityTest> = ACTIVITIES;
   tableConfig: TableConfig = {
-    showAction: true,
+    showAction: false,
     showFilter: false,
   }
   isLoadingTable: boolean = true
   statusTableRowFrom: string = 'INVALID'
 
   //------------------------------------
+  constructor (private matDialog: MatDialog){
+
+  }
   
   ngOnInit(): void {
     this.setColums()
+    this.isLoadingTable = false
   }
 
+  private getFormFields(){
+
+  }
+  private loadValuesFormFields(){
+
+  }
+  onSubmit(){
+
+  }
+  
 
   setColums() {
     this.tableColumns = [
-      { def: 'code', title: 'Código', dataKey: 'code' },
-      { def: 'name', title: 'Actividad', dataKey: 'name' },
-      { def: 'description', title: 'Descripción', dataKey: 'description' },
+      { def: 'code', title: 'Código', dataKey: 'code',  controlType: INPUT_TYPE.TEXT},
+      { def: 'name', title: 'Actividad', dataKey: 'name', controlType: INPUT_TYPE.TEXT },
+      { def: 'description', title: 'Descripción', dataKey: 'description', controlType: INPUT_TYPE.TEXT },
     ]
   }
 
+  onTableAction(tableAction: TableAction){
+    switch (tableAction.action){
+      case TABLE_ACTION.CREATE:
+        this.onCreate()
+        break;
+      case TABLE_ACTION.EDIT:
+        if (tableAction.rowIndex != undefined){
+          this.onEditRow( tableAction.row, tableAction.rowIndex)
+        }
+        break;
+      case TABLE_ACTION.DELETE:
+        if (tableAction.rowIndex != undefined) {
+          this.onDeleteRow(tableAction.rowIndex)
+        }
+        break;
+    }
+  }
+  onCreate(){
+    this.openDialog()
+  }
+  onEditRow(activity: Activity, id: number){
+    this.openDialog()
+    console.log('👨‍👨‍👧‍👧', 'Editando')
+  }
+  onDeleteRow(id: number){
+    console.log('🙎‍♂️', 'Eliminado'+id)
+  }
+
+  onCreateRowFormGroup(activity: Activity): FormGroup {
+    return new FormGroup({
+      id: new FormControl(activity.id),
+      code: new FormControl(activity.code),
+      name: new FormControl(activity.name),
+      description: new FormControl(activity.description),
+    })
+  }
+  openDialog(data?: Activity){
+    const dialogRef = this.matDialog.open(BaseFormModalComponent, {
+      width: '350px',
+      data: {
+        title: 'Pruebitas',
+        description: 'Espero que esta vez funciones'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('👨‍🚒', `Dialog result: ${result}`)
+    })
+  }
 
 }

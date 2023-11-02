@@ -1,28 +1,74 @@
-<section class="modal">
+<section class="form_modal">
     <button mat-icon-button matDialogClose class="btn btn--close">
         <mat-icon>close</mat-icon>
     </button>
     <mat-dialog-content>
-        <header>
-            <h1>Titulo</h1>
-        </header>
-        <mat-form-field>
-            <mat-label>Input</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Input</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Input</mat-label>
-            <input matInput>
-        </mat-form-field>
-
+        <ng-container *ngFor="let field of fields">
+            <ng-container [ngSwitch]="field.inputType" [formGroup]="formGroup">
+                <ng-container *ngSwitchCase="inputTypeControl.TEXT">
+                    <mat-form-field>
+                        <mat-label>{{field.label}}</mat-label>
+                        <input matInput [formControlName]="field.nameControl">
+                    </mat-form-field>
+                </ng-container>
+                <ng-container *ngSwitchCase="inputTypeControl.NUMBER">
+                    <mat-form-field floatLabel="always">
+                        <mat-label>{{field.label}}</mat-label>
+                        <input matInput type="number" placeholder="0" [formControlName]="field.nameControl">
+                    </mat-form-field>
+                </ng-container>
+                <ng-container *ngSwitchCase="inputTypeControl.TEXTAREA">
+                    <mat-form-field>
+                        <mat-label>{{field.label}}</mat-label>
+                        <textarea matInput [formControlName]="field.nameControl"></textarea>
+                    </mat-form-field>
+                </ng-container>
+                <ng-container *ngSwitchCase="inputTypeControl.CHECKBOX">
+                    <mat-checkbox [formControlName]="field.nameControl">{{field.label}}</mat-checkbox>
+                </ng-container>
+                <ng-container *ngSwitchCase="inputTypeControl.TOGGLE">
+                    <mat-slide-toggle [formControlName]="field.nameControl">{{field.label}}</mat-slide-toggle>
+                </ng-container>
+                <ng-container *ngSwitchCase="inputTypeControl.RADIO">
+                    <mat-radio-group [formControlName]="field.nameControl">
+                        <mat-radio-button value="option1">{{field.label}} 1</mat-radio-button>
+                        <mat-radio-button value="option2">{{field.label}} 2</mat-radio-button>
+                        <mat-radio-button value="option3">{{field.label}} 3</mat-radio-button>
+                    </mat-radio-group>
+                </ng-container>
+                <ng-container *ngSwitchCase="inputTypeControl.DATE">
+                    <mat-form-field>
+                        <mat-label>{{field.label}}</mat-label>
+                        <input matInput [matDatepicker]="picker" [formControlName]="field.nameControl">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </ng-container>
+                <ng-container *ngSwitchCase="inputTypeControl.SELECT">
+                    <mat-form-field>
+                        <mat-label>{{field.label}}</mat-label>
+                        <mat-select disableRipple [formControlName]="field.nameControl">
+                            <mat-option value="1">Option 1</mat-option>
+                            <mat-option value="2">Option 2</mat-option>
+                            <mat-option value="3">Option 3</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <mat-form-field>
+                        <mat-label>{{field.label}}</mat-label>
+                        <input matInput [formControlName]="field.nameControl">
+                    </mat-form-field>
+                </ng-container>
+            </ng-container>
+        </ng-container>
     </mat-dialog-content>
     <mat-dialog-actions>
         <button mat-raised-button color="warn" type="button" matDialogClose>Cancelar</button>
         <button mat-raised-button color="primary" type="button">Guardar</button>
     </mat-dialog-actions>
-    Hola
+</section>
+<section>
+    <ng-container *ngTemplateOutlet="data.template"></ng-container>
 </section>

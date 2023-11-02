@@ -2,3 +2,24 @@
     <h1>Productos</h1>
     <app-base-table [columns]="tableColumns" [data]="dataSource" [config]="tableConfig"></app-base-table>
 </section>
+<button (click)="openDialog()" >Dialogo</button>
+<button (click)="openDialogWithTemplate(template2)">
+    Open Dialog With Template 2
+  </button>
+  <ng-template #template2>
+    <h1 mat-dialog-title>Dialog With Template 2</h1>
+    <div mat-dialog-content>
+      <form [formGroup]="formGroup">
+        <mat-form-field>
+          <input matInput placeholder="name" formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="lastname" formControlName="lastname" />
+        </mat-form-field>
+      </form>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="guardar()">Save</button>
+      <button mat-button mat-dialog-close>Close</button>
+    </div>
+  </ng-template>
