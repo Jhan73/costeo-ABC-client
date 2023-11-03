@@ -13,6 +13,9 @@ const ELEMENT_DATA: products[] = [
 	{ service_line: 'Consultoria', service: 'Diagnóstico', activity: 'Realizar entrevista personal', activity_cost: 3182.45, service_cost: 11020.74},
 	{ service_line: 'Consultoria', service: 'Diagnóstico', activity: 'Mapear procesos', activity_cost: 669.33, service_cost: 11020.74},
 	{ service_line: 'Consultoria', service: 'Diagnóstico', activity: 'Generar informe', activity_cost: 3256.95, service_cost: 11020.74},
+	{ service_line: 'Consultoria', service: 'Implementación con diagnostico ajeno', activity: 'Analizar el diagnóstico previo', activity_cost: 7770.68, service_cost: 25210.91},
+	{ service_line: 'Consultoria', service: 'Implementación con diagnostico ajeno', activity: 'Generar plan de implementación', activity_cost: 17070.08, service_cost: 25210.91},
+	{ service_line: 'Consultoria', service: 'Implementación con diagnostico ajeno', activity: 'Generar hoja de ruta', activity_cost: 370.14, service_cost: 25210.91},
 ];
 
 const COLUMNS_SCHEMA = [
@@ -52,9 +55,9 @@ const COLUMNS_SCHEMA = [
 
 
 export class TableProdActComponent {
-    displayedColumns: string[] = COLUMNS_SCHEMA.map((col)=>col.key);
+    displayedColumns: string[] = COLUMNS_SCHEMA.map(col => col.key);
     dataSource : any = ELEMENT_DATA;
-	columnsSchema : any = COLUMNS_SCHEMA;
+	headers : string[] = COLUMNS_SCHEMA.map(col => col.label);
 }
 
 export interface Element {
