@@ -1,7 +1,7 @@
 <!--    
     Mostrar esta parte mientras el usuario no tenga que hacer ninguna acción.
     Sino, ocultarla-->
-<mat-card>
+<mat-card *ngIf="stage==0" fxFlex="50%">
     <mat-card-header>
         <p>Generando reporte</p>
     </mat-card-header>
@@ -19,7 +19,7 @@
     Mostrar esta parte si el usuario debe precisar Criterios de Reparto para Costos Indirectos
     (solo en caso de que algunos CI no tengan sus CR definidos)
 -->
-<mat-card>
+<mat-card *ngIf="stage==1">
     <mat-card-header>
         <p>Por favor no se vaya!</p>
     </mat-card-header>
@@ -33,7 +33,7 @@
 <!--
     
 -->
-<mat-card>
+<mat-card *ngIf="stage==2">
     <mat-card-header>
         <p>Un detalle más, por favor:</p>
     </mat-card-header>
@@ -47,7 +47,7 @@
 <!--
     
 -->
-<mat-card>
+<mat-card *ngIf="stage==3">
     <mat-card-header>
         <p>Vamos a la mitad:</p>
     </mat-card-header>
@@ -61,7 +61,7 @@
 <!--
     
 -->
-<mat-card>
+<mat-card *ngIf="stage==4">
     <mat-card-header>
         <p>Lo último:</p>
     </mat-card-header>

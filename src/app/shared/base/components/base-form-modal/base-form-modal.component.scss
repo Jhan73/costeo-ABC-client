@@ -1,9 +1,18 @@
-.modal{
+.form_modal{
     position: relative;
     .btn--close{
         float: right;
-        margin: 5px;
+        margin: 10px;
         position: absolute;
         right: 0;
+        z-index: 10;
+    }
+    .mat-field{
+        width: 100%;
+    }
+    .actions{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
     }
 }

@@ -1,4 +1,4 @@
 <section class="container">
     <h1>Recursos</h1>
-    <app-base-table [columns]="tableColumns" [data]="dataSource" [config]="tableConfig"></app-base-table>
+    <app-base-table [columns]="tableColumns" [data]="dataSource" [config]="tableConfig" (action)="onTableAction($event)"></app-base-table>
 </section>

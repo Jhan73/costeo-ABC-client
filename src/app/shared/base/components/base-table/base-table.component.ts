@@ -6,8 +6,6 @@ import { TABLE_ACTION } from 'src/app/enums/table-action.enum';
 import { TableAction } from 'src/app/models/table-action.model';
 import { TableColumn } from 'src/app/models/table-column.model';
 import { TableConfig } from 'src/app/models/table-config.model';
-import { MatDialog } from '@angular/material/dialog'
-import { BaseFormModalComponent } from '../base-form-modal/base-form-modal.component';
 
 @Component({
   selector: 'app-base-table',
@@ -47,7 +45,7 @@ export class BaseTableComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private matDialog: MatDialog){
+  constructor(){
     this.formGroup = new FormGroup({});
 
   }
@@ -97,16 +95,9 @@ export class BaseTableComponent implements AfterViewInit, OnInit {
     }
   }
   onCreate(){
-    // this.action.emit({action: TABLE_ACTION.CREATE})
+    this.action.emit({action: TABLE_ACTION.CREATE})
     // this.onEdit(this.dataSource.data[this.dataSource.data.length-1],this.dataSource.data.length-1)
     // this.statusRowForm.emit(this.formGroup.status)
-  }
-  
-  openDialog(){
-    this.matDialog.open(BaseFormModalComponent, {
-      width: '350px',
-    })
-
   }
 
   //=== Aplicar filtro ====

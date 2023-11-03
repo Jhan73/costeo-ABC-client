@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalDialogComponent } from './modal-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +11,10 @@ import { ModalDialogComponent } from './modal-dialog.component';
     ModalDialogComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class ModalDialogModule { }

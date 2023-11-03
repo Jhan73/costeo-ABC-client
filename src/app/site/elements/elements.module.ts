@@ -9,6 +9,12 @@ import { CostCentersComponent } from './pages/cost-centers/cost-centers.componen
 import { ResourcesComponent } from './pages/resources/resources.component';
 import { BaseTableModule } from 'src/app/shared/base/components/base-table/base-table.module';
 import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BaseFormModalModule } from 'src/app/shared/base/components/base-form-modal/base-form-modal.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalDialogModule } from 'src/app/shared/base/components/modal-dialog/modal-dialog.module';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +28,13 @@ import {MatInputModule} from '@angular/material/input';
     CommonModule,
     ElementsRoutingModule,
     BaseTableModule,
+    BaseFormModalModule,
     MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    ModalDialogModule,
   ]
 })
 export class ElementsModule { }
