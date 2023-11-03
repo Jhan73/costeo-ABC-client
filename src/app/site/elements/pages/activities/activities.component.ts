@@ -76,6 +76,7 @@ export class ActivitiesComponent implements OnInit {
     showAction: true,
     showFilter: true,
     showPaginator: true,
+    showAddButton: true,
   }
   isLoadingTable: boolean = true
   statusTableRowFrom: string = 'INVALID'

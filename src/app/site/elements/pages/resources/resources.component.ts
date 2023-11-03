@@ -27,6 +27,8 @@ export class ResourcesComponent implements OnInit {
   tableConfig: TableConfig = {
     showAction: true,
     showFilter: false,
+    showPaginator: true,
+    showAddButton: true,
   }
   isLoadingTable: boolean = true
   statusTableRowFrom: string = 'INVALID'

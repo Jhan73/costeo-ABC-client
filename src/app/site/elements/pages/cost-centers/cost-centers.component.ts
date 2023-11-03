@@ -41,7 +41,9 @@ export class CostCentersComponent implements OnInit {
   dataSource: Array<CostCenter> = COSTCENTERS;
   tableConfig: TableConfig = {
     showAction: true,
-    showFilter: false,
+    showFilter: true,
+    showPaginator: true,
+    showAddButton: true,
   }
   isLoadingTable: boolean = true
   statusTableRowFrom: string = 'INVALID'
