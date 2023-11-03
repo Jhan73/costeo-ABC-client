@@ -14,12 +14,14 @@ import { TableIcDcComponent } from './pages/generate-report/table-ic-dc/table-ic
 import { TableSicDistributionComponent } from './pages/generate-report/table-sic-distribution/table-sic-distribution.component';
 import { TableSupicDistributionComponent } from './pages/generate-report/table-supic-distribution/table-supic-distribution.component';
 import { TableOicDistributionComponent } from './pages/generate-report/table-oic-distribution/table-oic-distribution.component';
+import { TableProdActComponent } from './pages/view-analysis/table-prod-act/table-prod-act.component';
 
 @NgModule({
     declarations: [
         AnalysisComponent,
         ViewAnalysisComponent,
-        GenerateReportComponent
+        GenerateReportComponent,
+        TableProdActComponent
     ],
     imports: [
         CommonModule,

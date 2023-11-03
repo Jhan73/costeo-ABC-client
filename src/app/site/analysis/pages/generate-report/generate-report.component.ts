@@ -10,5 +10,13 @@ import { TableOicDistributionComponent } from './table-oic-distribution/table-oi
   styleUrls: ['./generate-report.component.scss']
 })
 export class GenerateReportComponent {
-
+  /*
+  Valores del stage para visibilidad
+  0: "procesando"
+  1: tabla de criterios de reparto
+  2: tabla de reparto de Estratégicos
+  3: tabla de reparto de Apoyo
+  4: tabla de reparto de Operativos
+  */
+  stage: number = 0;
 }

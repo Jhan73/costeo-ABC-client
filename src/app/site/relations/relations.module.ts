@@ -7,6 +7,7 @@ import { ActivityProductComponent } from './pages/activity-product/activity-prod
 import { CostCenterResourceComponent } from './pages/cost-center-resource/cost-center-resource.component';
 import { ResourceActivityComponent } from './pages/resource-activity/resource-activity.component';
 import { MaterialLaborComponent } from './pages/material-labor/material-labor.component';
+import { BaseTableModule } from 'src/app/shared/base/components/base-table/base-table.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MaterialLaborComponent } from './pages/material-labor/material-labor.co
   ],
   imports: [
     CommonModule,
-    RelationsRoutingModule
+    RelationsRoutingModule,
+    BaseTableModule
   ]
 })
 export class RelationsModule { }
