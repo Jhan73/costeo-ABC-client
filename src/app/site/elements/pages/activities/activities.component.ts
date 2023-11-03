@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { INPUT_TYPE } from 'src/app/enums/input_type.enum';
 import { TABLE_ACTION } from 'src/app/enums/table-action.enum';
 import { Activity } from 'src/app/models/activity.model';
@@ -8,6 +8,10 @@ import { TableColumn } from 'src/app/models/table-column.model';
 import { TableConfig } from 'src/app/models/table-config.model';
 import { BaseFormModalComponent } from 'src/app/shared/base/components/base-form-modal/base-form-modal.component';
 import { MatDialog } from '@angular/material/dialog'
+import { ModalInput } from 'src/app/models/modalInput.model';
+import { DialogService } from 'src/app/shared/base/services/dialog.service';
+import { Subscription } from 'rxjs';
+import { DataService } from 'src/app/shared/base/services/data.service';
 
 export interface PeriodicElement {
   name: string;
@@ -69,20 +73,34 @@ export class ActivitiesComponent implements OnInit {
   tableColumns: TableColumn[] = [];
   dataSource: Array<ActivityTest> = ACTIVITIES;
   tableConfig: TableConfig = {
-    showAction: false,
-    showFilter: false,
+    showAction: true,
+    showFilter: true,
   }
   isLoadingTable: boolean = true
   statusTableRowFrom: string = 'INVALID'
 
   //------------------------------------
-  constructor (private matDialog: MatDialog){
-
+  //============ MODAL =================
+  modalFormGroup: FormGroup
+  fields: ModalInput[] = [
+    {inputType: INPUT_TYPE.TEXT, label: 'Codigo', controlName: 'code'},
+    {inputType: INPUT_TYPE.TEXT, label: 'Nombre', controlName: 'name'},
+    {inputType: INPUT_TYPE.TEXTAREA, label: 'Descripción', controlName: 'description'},
+  ]
+  //------------------------------------
+  constructor (private matDialog: MatDialog, private dialogService: DialogService, private formBuilder: FormBuilder, 
+    private dataService: DataService){
+    this.modalFormGroup = new FormGroup({})
+    this.defineModalFormGroup()
   }
   
   ngOnInit(): void {
     this.setColums()
     this.isLoadingTable = false
+    this.onSave()
+  }
+  ngOnDestroy() {
+    this.dataService.formData.unsubscribe();
   }
 
   private getFormFields(){
@@ -91,17 +109,9 @@ export class ActivitiesComponent implements OnInit {
   private loadValuesFormFields(){
 
   }
+
   onSubmit(){
 
-  }
-  
-
-  setColums() {
-    this.tableColumns = [
-      { def: 'code', title: 'Código', dataKey: 'code',  controlType: INPUT_TYPE.TEXT},
-      { def: 'name', title: 'Actividad', dataKey: 'name', controlType: INPUT_TYPE.TEXT },
-      { def: 'description', title: 'Descripción', dataKey: 'description', controlType: INPUT_TYPE.TEXT },
-    ]
   }
 
   onTableAction(tableAction: TableAction){
@@ -122,36 +132,58 @@ export class ActivitiesComponent implements OnInit {
     }
   }
   onCreate(){
-    this.openDialog()
+    this.openModal()
   }
   onEditRow(activity: Activity, id: number){
-    this.openDialog()
-    console.log('👨‍👨‍👧‍👧', 'Editando')
+    this.openModal()
+    console.log('👨‍👨‍👧‍👧', 'Editando',activity)
+    this.modalFormGroup.patchValue({
+      code: activity.code,
+      name: activity.name,
+      description: activity.description,
+    })
+
+  }
+  onSave(){
+    this.dataService.formData.subscribe(data => {
+      const index = this.dataSource.findIndex(act => {
+        return act.code === data.code
+      });
+
+      if (index !== -1) {
+        this.dataSource[index].name = data.name;
+        this.dataSource[index].description = data.description;
+      }
+    })
   }
   onDeleteRow(id: number){
     console.log('🙎‍♂️', 'Eliminado'+id)
+    this.dataSource.splice(id, 1)
+    this.dataSource = this.dataSource.map(item => item)
   }
+  
+  //============ TABLE =================
+  setColums() {
+    this.tableColumns = [
+      { def: 'code', title: 'Código', dataKey: 'code'},
+      { def: 'name', title: 'Actividad', dataKey: 'name' },
+      { def: 'description', title: 'Descripción', dataKey: 'description' },
+    ]
+  }
+  //------------------------------------
+  //============ MODAL =================
 
-  onCreateRowFormGroup(activity: Activity): FormGroup {
-    return new FormGroup({
-      id: new FormControl(activity.id),
-      code: new FormControl(activity.code),
-      name: new FormControl(activity.name),
-      description: new FormControl(activity.description),
+  defineModalFormGroup() {
+    this.modalFormGroup = this.formBuilder.group({
+      code:['', Validators.required],
+      name:['', Validators.required],
+      description:['', Validators.required],
     })
   }
-  openDialog(data?: Activity){
-    const dialogRef = this.matDialog.open(BaseFormModalComponent, {
-      width: '350px',
-      data: {
-        title: 'Pruebitas',
-        description: 'Espero que esta vez funciones'
-      }
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('👨‍🚒', `Dialog result: ${result}`)
-    })
+  openModal(){
+    this.dialogService.openFormModal({title: 'Actividad', fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
   }
-
+  //------------------------------------
 }
+

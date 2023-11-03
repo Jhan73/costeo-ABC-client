@@ -1,6 +1,7 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { BaseFormModalComponent } from '../components/base-form-modal/base-form-modal.component';
+import { ModalData } from 'src/app/models/modal-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,10 @@ export class DialogService {
 
   constructor(private matDialog: MatDialog) { }
 
-  openDialog(data: {title: string, content: string}){
-    this.matDialog.open(ModalDialogComponent, {data})
-  }
-  openFormDialog(template: TemplateRef<any>){
-    return this.matDialog.open(ModalDialogComponent, {data: template})
+  openFormModal(data: ModalData){
+    return this.matDialog.open(BaseFormModalComponent, {
+      width: '350px',
+      data: data
+    })
   }
 }

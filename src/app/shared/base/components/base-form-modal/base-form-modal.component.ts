@@ -1,7 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { INPUT_TYPE } from 'src/app/enums/input_type.enum';
+import { ModalData } from 'src/app/models/modal-data.model';
+import { ModalInput } from 'src/app/models/modalInput.model';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-base-form-modal',
@@ -12,36 +15,25 @@ export class BaseFormModalComponent {
 
   inputTypeControl = INPUT_TYPE;
   formGroup: FormGroup;
-  @Input() rowFormGroup!: (item: any) => FormGroup
+  fields: ModalInput[] = []
 
-
-  fields: {inputType: INPUT_TYPE, label: string, nameControl: string}[] = [
-    {inputType: INPUT_TYPE.TEXT, label: 'Texto', nameControl: 'textControl'},
-    {inputType: INPUT_TYPE.NUMBER, label: 'Numero', nameControl: 'numberControl'},
-    {inputType: INPUT_TYPE.DATE, label: 'Fecha', nameControl: 'dateControl'},
-    {inputType: INPUT_TYPE.RADIO, label: 'Radio', nameControl: 'radioControl'},
-    {inputType: INPUT_TYPE.TOGGLE, label: 'Togle', nameControl: 'toggleControl'},
-    {inputType: INPUT_TYPE.SELECT, label: 'Seleccionable', nameControl: 'selectControl'},
-    {inputType: INPUT_TYPE.TEXTAREA, label: 'Area de texto', nameControl: 'textareaControl'},
-  ]
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder){
-    this.formGroup = new FormGroup({})
-    this.formGroup = this.formBuilder.group({
-      textControl:['', Validators.required],
-      numberControl:[''],
-      dateControl:[''],
-      radioControl:[''],
-      toggleControl:[''],
-      selectControl:[''],
-      textareaControl:[''],
-    })
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ModalData, private dataService: DataService,
+   private dialogRef: MatDialogRef<BaseFormModalComponent>){
+    this.fields = data.fields
+    this.formGroup = data.formGroup
   }
 
-
-
-
-
-
+  onSubmit(){
+    console.log('🧜‍♂️', this.formGroup.value)
+    // this.formGroup.reset();
+    this.dataService.formData.emit(this.formGroup.value)
+    this.formGroup.markAsPristine();
+    this.dialogRef.close();
+  }
+  onCancel(){
+    this.formGroup.reset();
+    this.formGroup.markAsPristine();
+    this.dialogRef.close();
+  }
 
 }

@@ -1,9 +1,14 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { INPUT_TYPE } from 'src/app/enums/input_type.enum';
+import { TABLE_ACTION } from 'src/app/enums/table-action.enum';
+import { ModalInput } from 'src/app/models/modalInput.model';
+import { TableAction } from 'src/app/models/table-action.model';
 import { TableColumn } from 'src/app/models/table-column.model';
 import { TableConfig } from 'src/app/models/table-config.model';
 import { ModalDialogComponent } from 'src/app/shared/base/components/modal-dialog/modal-dialog.component';
+import { DataService } from 'src/app/shared/base/services/data.service';
 import { DialogService } from 'src/app/shared/base/services/dialog.service';
 
 export interface Product{
@@ -45,53 +50,117 @@ export class ProductsComponent implements OnInit {
   statusTableRowFrom: string = 'INVALID'
 
   //------------------------------------
-//************************************************** */
-
-title = 'dialog-reutilizable';
-
-  formGroup: FormGroup = new FormGroup({
-    name: new FormControl(),
-    lastname: new FormControl(),
-  });
-  private matDialogRef!: MatDialogRef<ModalDialogComponent>;
+  //============ MODAL =================
+  modalFormGroup: FormGroup
+  fields: ModalInput[] = [
+    {inputType: INPUT_TYPE.TEXT, label: 'Codigo', controlName: 'code'},
+    {inputType: INPUT_TYPE.TEXT, label: 'Nombre', controlName: 'name'},
+    {inputType: INPUT_TYPE.TEXTAREA, label: 'Descripción', controlName: 'description'},
+  ]
+  //------------------------------------
+  constructor (private matDialog: MatDialog, private dialogService: DialogService, private formBuilder: FormBuilder, 
+    private dataService: DataService){
+    this.modalFormGroup = new FormGroup({})
+    this.defineModalFormGroup()
+  }
   
-  constructor(private dialogService: DialogService){
-    
-  }
-  openDialogWithTemplate(template: TemplateRef<any>) {
-    this.matDialogRef = this.dialogService.openFormDialog(
-      template
-    );
-    
-    this.matDialogRef.afterClosed().subscribe((res) => {
-      console.log('Dialog With Template Close', res);
-      this.formGroup.reset();
-    });
-  }
-  guardar() {
-    console.log(this.formGroup.value);
-    this.formGroup.reset();
-    this.matDialogRef.close();
-  }
-
   ngOnInit(): void {
     this.setColums()
+    this.isLoadingTable = false
+    this.onSave()
+  }
+  ngOnDestroy() {
+    this.dataService.formData.unsubscribe();
   }
 
+  private getFormFields(){
+
+  }
+  private loadValuesFormFields(){
+
+  }
+
+  onSubmit(){
+
+  }
+
+  onTableAction(tableAction: TableAction){
+    switch (tableAction.action){
+      case TABLE_ACTION.CREATE:
+        this.onCreate()
+        break;
+      case TABLE_ACTION.EDIT:
+        if (tableAction.rowIndex != undefined){
+          this.onEditRow( tableAction.row, tableAction.rowIndex)
+        }
+        break;
+      case TABLE_ACTION.DELETE:
+        if (tableAction.rowIndex != undefined) {
+          this.onDeleteRow(tableAction.rowIndex)
+        }
+        break;
+    }
+  }
+  onCreate(){
+    this.openModal()
+  }
+  onEditRow(product: Product, id: number){
+    this.openModal()
+    console.log('👨‍👨‍👧‍👧', 'Editando',product)
+    this.modalFormGroup.patchValue({
+      code: product.code,
+      name: product.name,
+      productLine: product.productoLine,
+      number: product.number,
+      description: product.description,
+    })
+
+  }
+  onSave(){
+    this.dataService.formData.subscribe(data => {
+      const index = this.dataSource.findIndex(act => {
+        return act.code === data.code
+      });
+
+      if (index !== -1) {
+        this.dataSource[index].name = data.name;
+        this.dataSource[index].description = data.description;
+      }
+    })
+  }
+  onDeleteRow(id: number){
+    console.log('🙎‍♂️', 'Eliminado'+id)
+    this.dataSource.splice(id, 1)
+    this.dataSource = this.dataSource.map(item => item)
+  }
+ 
+  //============ TABLE =================
 
   setColums() {
     this.tableColumns = [
       { def: 'code', title: 'Código', dataKey: 'code' },
       { def: 'name', title: 'Producto', dataKey: 'name' },
-      { def: 'productoLine', title: 'Linea de producto', dataKey: 'productoLine' },
+      { def: 'productLine', title: 'Linea de producto', dataKey: 'productLine' },
       { def: 'number', title: 'Numero', dataKey: 'number' },
       { def: 'description', title: 'Descripción', dataKey: 'description' },
     ]
   }
+  //------------------------------------
+  //============ MODAL =================
 
-
-  openDialog(){
-    this.dialogService.openDialog({title: 'Titulito', content: 'Contenido'})
+  defineModalFormGroup() {
+    this.modalFormGroup = this.formBuilder.group({
+      code:['', Validators.required],
+      name:['', Validators.required],
+      productLine: ['', Validators.required],
+      number: ['', Validators.required],
+      description:['', Validators.required],
+    })
   }
+
+  openModal(){
+    this.dialogService.openFormModal({title: 'Actividad', fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
+  }
+  //------------------------------------
 
 }

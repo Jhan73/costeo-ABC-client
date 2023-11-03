@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BaseFormModalModule } from 'src/app/shared/base/components/base-form-modal/base-form-modal.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ModalDialogModule } from 'src/app/shared/base/components/modal-dialog/modal-dialog.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    ModalDialogModule,
   ]
 })
 export class ElementsModule { }
