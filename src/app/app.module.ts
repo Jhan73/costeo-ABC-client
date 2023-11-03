@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { ForgotComponent } from './auth/pages/forgot/forgot.component';
+import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import {NgIf} from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -38,10 +40,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     HeaderModule,
     MenuBarModule,
     FooterModule,
+    FormsModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatTableModule,
     MatFormFieldModule, MatInputModule, NgIf,ReactiveFormsModule,
     MatCheckboxModule,
   ],
