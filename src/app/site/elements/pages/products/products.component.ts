@@ -53,6 +53,7 @@ export class ProductsComponent implements OnInit {
 
   //------------------------------------
   //============ MODAL =================
+  productFormButtonText: string = 'Guardar'
   modalFormGroup: FormGroup
   fields: ModalInput[] = [
     {inputType: INPUT_TYPE.TEXT, label: 'Codigo', controlName: 'code'},
@@ -161,7 +162,7 @@ export class ProductsComponent implements OnInit {
   }
 
   openModal(){
-    this.dialogService.openFormModal({title: 'Actividad', fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
+    this.dialogService.openFormModal({title: 'Producto', buttonText: this.productFormButtonText, fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
   }
   //------------------------------------
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -45,7 +45,7 @@ export class BaseTableComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(){
+  constructor(private cd: ChangeDetectorRef){
     this.formGroup = new FormGroup({});
 
   }
@@ -63,9 +63,20 @@ export class BaseTableComponent implements AfterViewInit, OnInit {
 
   setConfig(config: TableConfig){
     this.tableConfig = config;
+    // this.displayedColumns = this.tableColumns.map(col => col.def);
     if(this.tableConfig.showAction){
-      this.displayedColumns.push('actions')
-    }
+    //   if (!this.displayedColumns.includes('actions')) {
+      this.displayedColumns.push('actions');
+    //   }
+    } 
+    // else {
+    //   this.displayedColumns = this.displayedColumns.filter(col => col !== 'actions');
+    // }
+    // this.cd.detectChanges()
+    // console.log('🤐', config)
+  //   this.displayedColumns = this.tableConfig.showAction ? ['actions'] : [];
+  // // Ahora agregar el resto de las columnas definidas
+  //   this.displayedColumns.push(...this.tableColumns.map(col => col.def));
   }
 
   onEdit(row: any, index: number){

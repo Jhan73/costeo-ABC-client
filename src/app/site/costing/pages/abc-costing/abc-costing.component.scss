@@ -1,0 +1,11 @@
+.stepper-section{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 20px;
+}
+.stepper-form{
+   padding: 10px;
+}
+.stepper-detail{
+    padding: 10px;
+}

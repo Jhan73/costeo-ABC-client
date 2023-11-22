@@ -58,6 +58,7 @@ export class ActivityProductComponent {
 
     //------------------------------------
     //============ MODAL =================
+    activityProductFormButtonText: string = 'Guardar'
     modalFormGroup: FormGroup
     fields: ModalInput[] = [
       {inputType: INPUT_TYPE.TEXT, label: 'Codigo', controlName: 'code'},
@@ -154,7 +155,7 @@ export class ActivityProductComponent {
     }
 
     openModal(){
-      this.dialogService.openFormModal({title: 'Actividad', fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
+      this.dialogService.openFormModal({title: 'Actividad', buttonText: this.activityProductFormButtonText, fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
     }
     //------------------------------------
   //------------------------------------

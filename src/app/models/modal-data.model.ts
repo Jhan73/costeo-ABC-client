@@ -2,7 +2,8 @@ import { FormGroup } from "@angular/forms";
 import { ModalInput } from "./modalInput.model";
 
 export interface ModalData {
-    title: string,
+    title: string;
     fields: ModalInput[];
     formGroup: FormGroup;
+    buttonText: string;
 }

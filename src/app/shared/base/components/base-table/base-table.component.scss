@@ -10,3 +10,13 @@ table {
 .add-button{
     margin-bottom: 20px;
 }
+.table-header{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.mat-field{
+    width: 80%;
+}

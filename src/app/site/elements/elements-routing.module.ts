@@ -4,6 +4,7 @@ import { ActivitiesComponent } from './pages/activities/activities.component';
 import { CostCentersComponent } from './pages/cost-centers/cost-centers.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ResourcesComponent } from './pages/resources/resources.component';
+import { InductorsComponent } from './pages/inductors/inductors.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'activities', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'cost-centers', component: CostCentersComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'resources', component: ResourcesComponent },
+  { path: 'inductors', component: InductorsComponent },
 ];
 
 @NgModule({

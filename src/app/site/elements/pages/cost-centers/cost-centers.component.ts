@@ -49,7 +49,8 @@ export class CostCentersComponent implements OnInit {
   statusTableRowFrom: string = 'INVALID'
 
   //------------------------------------
-
+  //============ MODAL =================
+  costCenterFormButtonText: string = 'Guardar'
   modalFormGroup: FormGroup
   fields: ModalInput[] = [
     {inputType: INPUT_TYPE.TEXT, label: 'Codigo', controlName: 'code'},
@@ -138,7 +139,7 @@ export class CostCentersComponent implements OnInit {
   }
 
   openModal(){
-    this.dialogService.openFormModal({title: 'Centro de costo', fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
+    this.dialogService.openFormModal({title: 'Centro de costo', buttonText: this.costCenterFormButtonText, fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
   }
   
 

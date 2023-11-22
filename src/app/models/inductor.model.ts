@@ -1,9 +1,9 @@
 export interface Inductor {
-    id: number;
+    id?: number;
     name: string;
-    description: string;
+    description?: string;
     code: string;
     state?: boolean;
-    activityId: number;
+    activityId?: number;
     activity?: string;
 }

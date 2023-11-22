@@ -10,6 +10,7 @@
                 <a class="menu-link" mat-menu-item href="site/elements/cost-centers">Centros de costo</a>
                 <a class="menu-link" mat-menu-item href="site/elements/products">Productos</a>
                 <a class="menu-link" mat-menu-item href="site/elements/resources">Recurso</a>
+                <a class="menu-link" mat-menu-item href="site/elements/inductors">Inductores</a>
             </mat-menu>
         </li>
         <li class="menu-item">
@@ -22,6 +23,15 @@
                 <a class="menu-link" mat-menu-item href="site/relations/cost-center-resource">Centro de costo - Recurso</a>
                 <a class="menu-link" mat-menu-item href="site/relations/material-labor">Material - Mano de obra</a>
                 <a class="menu-link" mat-menu-item href="site/relations/resource-activity">Recurso - Actividad</a>
+            </mat-menu>
+        </li>
+        <li class="menu-item">
+            <button class="menu-button" mat-button [matMenuTriggerFor]="costingMenu">
+                Costeo
+                <mat-icon class="material-symbols-outlined">expand_more</mat-icon>
+            </button>
+            <mat-menu #costingMenu="matMenu">
+                <a class="menu-link" mat-menu-item href="site/costing/abc-costing">Costeo ABC</a>
             </mat-menu>
         </li>
         <li class="menu-item">

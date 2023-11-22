@@ -35,6 +35,7 @@ export class ResourcesComponent implements OnInit {
 
   //------------------------------------
   //============ MODAL =================
+  resourceFormButtonText: string = 'Guardar'
   modalFormGroup: FormGroup
   fields: ModalInput[] = [
     {inputType: INPUT_TYPE.TEXT, label: 'Codigo', controlName: 'code'},
@@ -140,7 +141,7 @@ export class ResourcesComponent implements OnInit {
   }
 
   openModal(){
-    this.dialogService.openFormModal({title: 'Recurso', fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
+    this.dialogService.openFormModal({title: 'Recurso', buttonText: this.resourceFormButtonText, fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
   }
   //------------------------------------
 }

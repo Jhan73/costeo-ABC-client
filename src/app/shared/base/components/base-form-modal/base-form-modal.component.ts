@@ -26,7 +26,8 @@ export class BaseFormModalComponent {
   onSubmit(){
     console.log('🧜‍♂️', this.formGroup.value)
     // this.formGroup.reset();
-    this.dataService.formData.emit(this.formGroup.value)
+    // this.dataService.formData.emit(this.formGroup.value)
+    this.dataService.emitFormData(this.formGroup.value)
     this.formGroup.markAsPristine();
     this.dialogRef.close();
   }

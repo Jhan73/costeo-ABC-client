@@ -12,6 +12,7 @@ import { ModalInput } from 'src/app/models/modalInput.model';
 import { DialogService } from 'src/app/shared/base/services/dialog.service';
 import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/shared/base/services/data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface PeriodicElement {
   name: string;
@@ -80,9 +81,10 @@ export class ActivitiesComponent implements OnInit {
   }
   isLoadingTable: boolean = true
   statusTableRowFrom: string = 'INVALID'
-
+  
   //------------------------------------
   //============ MODAL =================
+  activityFormButtonText: string = 'Guardar'
   modalFormGroup: FormGroup
   fields: ModalInput[] = [
     {inputType: INPUT_TYPE.TEXT, label: 'Codigo', controlName: 'code'},
@@ -91,7 +93,7 @@ export class ActivitiesComponent implements OnInit {
   ]
   //------------------------------------
   constructor (private matDialog: MatDialog, private dialogService: DialogService, private formBuilder: FormBuilder, 
-    private dataService: DataService){
+    private dataService: DataService, private snackBar: MatSnackBar){
     this.modalFormGroup = new FormGroup({})
     this.defineModalFormGroup()
   }
@@ -162,6 +164,12 @@ export class ActivitiesComponent implements OnInit {
     console.log('🙎‍♂️', 'Eliminado'+id)
     this.dataSource.splice(id, 1)
     this.dataSource = this.dataSource.map(item => item)
+    this.openSnackBar('Actividad Eliminada', 'Cerrar')
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000
+    });
   }
   
   //============ TABLE =================
@@ -184,7 +192,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   openModal(){
-    this.dialogService.openFormModal({title: 'Actividad', fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
+    this.dialogService.openFormModal({title: 'Actividad', buttonText: this.activityFormButtonText, fields: this.fields, formGroup: this.modalFormGroup}).afterClosed().subscribe( res => {console.log('👨‍🎨', res)})
   }
   //------------------------------------
 }

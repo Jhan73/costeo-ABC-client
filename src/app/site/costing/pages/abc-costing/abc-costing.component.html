@@ -1,0 +1,263 @@
+<mat-vertical-stepper [linear]="false" #stepper animationDuration="1000">
+    <mat-step [stepControl]="costObjectFormGroup">
+        <ng-template matStepLabel>Objeto de costo</ng-template>
+        <section class="stepper-section">
+            <form [formGroup]="costObjectFormGroup" class="stepper-form">
+
+                <mat-form-field class="mat-field">
+                    <mat-label>Código</mat-label>
+                    <input matInput formControlName="code">
+                </mat-form-field>
+                <mat-form-field class="mat-field">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+                <mat-form-field class="mat-field">
+                    <mat-label>Cantidad</mat-label>
+                    <input matInput type="number" placeholder="0" formControlName="cant">
+                </mat-form-field>
+                <mat-form-field class="mat-field">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput formControlName="description">
+                </mat-form-field>
+
+                <div>
+                    <button mat-raised-button matStepperNext>Next</button>
+                    <button mat-flat-button color="primary" (click)="onSaveCostObject()"
+                        [disabled]="costObjectFormGroup.status == 'INVALID'">{{costObjectButtonText}}</button>
+                </div>
+            </form>
+            <section class="stepper-detail">
+                <h3>Detalles</h3>
+                <app-base-table [columns]="costObjectTableColumns" [data]="costObjectDataSource" [config]="tableConfig"
+                    (action)="onTableActionCostObject($event)"></app-base-table>
+            </section>
+        </section>
+    </mat-step>
+    <mat-step [stepControl]="directCostElementFormGroup">
+        <ng-template matStepLabel>Elementos de costeo Directos</ng-template>
+        <mat-vertical-stepper [linear]="false" #stepper animationDuration="1000">
+            <mat-step [stepControl]="directLaborFormGroup">
+                <section class="stepper-section">
+        
+                    <form [formGroup]="directLaborFormGroup"  class="stepper-form">
+                        <ng-template matStepLabel>Mano de obra directa</ng-template>
+                        <mat-form-field class="mat-field">
+                            <mat-label>Personal</mat-label>
+                            <input matInput formControlName="labor">
+                        </mat-form-field>
+                        <mat-form-field floatLabel="always" class="mat-field">
+                            <mat-label>Costo Soles/mes</mat-label>
+                            <input matInput type="number" placeholder="0" formControlName="cost">
+                        </mat-form-field>
+                        <mat-form-field class="mat-field">
+                            <mat-label>Creiterio de Reparto</mat-label>
+                            <input matInput formControlName="criterioReparto">
+                        </mat-form-field>
+                        <mat-form-field class="mat-field" *ngFor="let costObject of costObjectDataSource">
+                            <mat-label>{{costObject.name}}</mat-label>
+                            <input matInput type="number" [formControlName]="costObject.code">
+                        </mat-form-field>
+                        <div>
+                            <button mat-flat-button matStepperPrevious>Back</button>
+                            <button mat-flat-button matStepperNext>Next</button>
+                            <button mat-flat-button color="accent" (click)="showTableDirectLabor()">Refrescar tabla</button>
+                            <button mat-flat-button color="primary"
+                                (click)="onSaveDirectLabor()">{{directLaborButtonText}}</button>
+                        </div>
+                    </form>
+                    <section class="stepper-detail">
+                        <h3>Detalles</h3>
+                        <div *ngIf="showTableIndirectElements">
+                            <app-base-table [columns]="directLaborTableColumns" [data]="directLaborDataSource"
+                                [config]="tableConfig" (action)="onTableActionDirectLabor($event)"></app-base-table>
+                        </div>
+                    </section>
+                </section>
+
+
+            </mat-step>
+            <mat-step [stepControl]="directRawMaterialFormGroup">
+                <section class="stepper-section">
+
+                    <form [formGroup]="directRawMaterialFormGroup" class="stepper-form">
+                        <ng-template matStepLabel>Materia Prima Directa</ng-template>
+                        <mat-form-field class="mat-field">
+                            <mat-label>Material</mat-label>
+                            <input matInput formControlName="material">
+                        </mat-form-field>
+                        <mat-form-field class="mat-field">
+                            <mat-label>UM</mat-label>
+                            <input matInput >
+                        </mat-form-field>
+                        <mat-form-field class="mat-field">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput type="number" placeholder="0">
+                        </mat-form-field>
+                        <mat-form-field class="mat-field">
+                            <mat-label>Cto unit</mat-label>
+                            <input matInput type="number" placeholder="0">
+                        </mat-form-field>
+                        <p>CMD : S/</p>
+                        <div>
+                            <button mat-flat-button matStepperPrevious>Back</button>
+                            <button mat-flat-button matStepperNext>Next</button>
+                            <button mat-flat-button color="accent" (click)="showTableDirectRawMaterial()">Refrescar tabla</button>
+                            <button mat-flat-button color="primary"
+                                (click)="onSaveDirectRawMaterial()">{{directRawMaterialButtonText}}</button>
+                        </div>
+                    </form>
+                    <section class="stepper-detail">
+                        <h3>Detalles</h3>
+                        <div *ngIf="showTableDirectRawMaterials">
+                            <app-base-table [columns]="directRawMaterialTableColumns" [data]="directRawMaterialDataSource"
+                                [config]="tableConfig" (action)="onTableActionDirectRawMaterial($event)"></app-base-table>
+                        </div>
+                    </section>
+                </section>
+            </mat-step>
+            <mat-step>
+                <section class="stepper-section">
+                    <form [formGroup]="directServiceFormGroup" class="stepper-form">
+                        <ng-template matStepLabel>Servicios directos</ng-template>
+                        <mat-form-field class="mat-field">
+                            <mat-label>Servicio</mat-label>
+                            <input matInput formControlName="service">
+                        </mat-form-field>
+                        <mat-form-field class="mat-field">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput type="number" placeholder="0">
+                        </mat-form-field>
+                        <mat-form-field class="mat-field">
+                            <mat-label>Cto unit</mat-label>
+                            <input matInput type="number" placeholder="0">
+                        </mat-form-field>
+                        <p>CSD : S/</p>
+                        <div>
+                            <button mat-flat-button matStepperPrevious>Back</button>
+                            <button mat-flat-button matStepperNext>Next</button>
+                            <button mat-flat-button color="accent" (click)="showTableDirectService()">Refrescar tabla</button>
+                            <button mat-flat-button color="primary"
+                                (click)="onSaveDirectService()">{{directServiceButtonText}}</button>
+                        </div>
+                    </form>
+                    <section class="stepper-detail">
+                        <h3>Detalles</h3>
+                        <div *ngIf="showTableDirectServices">
+                            <app-base-table [columns]="directServiceTableColumns" [data]="directServiceDataSource"
+                                [config]="tableConfig" (action)="onTableActionDirectService($event)"></app-base-table>
+                        </div>
+                    </section>
+                </section>
+
+            </mat-step>
+        </mat-vertical-stepper>
+
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+        </div>
+        <!-- </form> -->
+    </mat-step>
+    <mat-step [stepControl]="indirectCostElementFormGroup">
+        <section class="stepper-section">
+            <form [formGroup]="indirectCostElementFormGroup" class="stepper-form">
+                <ng-template matStepLabel>Elementos de costeo Indirecto</ng-template>
+                <mat-form-field class="mat-field">
+                    <mat-label>Actiidad</mat-label>
+                    <input matInput formControlName="activity">
+                </mat-form-field>
+                <mat-form-field class="mat-field">
+                    <mat-label>Costo</mat-label>
+                    <input matInput type="number" placeholder="0" formControlName="cost">
+                </mat-form-field>
+                <mat-form-field class="mat-field">
+                    <mat-label>Inductor</mat-label>
+                    <mat-select disableRipple formControlName="inductor">
+                        <mat-option> -- Ninguno --</mat-option>
+                        <mat-option *ngFor="let inductor of inductors" [value]="inductor.code">{{inductor.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mat-field" *ngFor="let costObject of costObjectDataSource">
+                    <mat-label>{{costObject.name}}</mat-label>
+                    <input matInput type="number" [formControlName]="costObject.code">
+                </mat-form-field>
+                <div>
+                    <button mat-flat-button matStepperPrevious>Back</button>
+                    <button mat-flat-button matStepperNext>Next</button>
+                    <button mat-flat-button color="accent" (click)="showTable()">Refrescar tabla</button>
+                    <button mat-flat-button color="primary"
+                        (click)="onSaveIndirectCostElement()">{{indirectCostElementButtonText}}</button>
+                </div>
+            </form>
+            <section class="stepper-detail">
+                <h3>Detalles</h3>
+                <div *ngIf="showTableIndirectElements">
+                    <app-base-table [columns]="indirectCostElementTableColumns" [data]="indirectCostElementDataSource"
+                        [config]="tableConfig" (action)="onTableActionIndirectCostElement($event)"></app-base-table>
+                </div>
+            </section>
+        </section>
+
+    </mat-step>
+    <mat-step [stepControl]="fourthFormGroup">
+        <section class="stepper-section">
+            <form [formGroup]="fourthFormGroup">
+                <ng-template matStepLabel>Calcular costo</ng-template>
+                <!-- <mat-form-field>
+                    <input matInput placeholder="Address" formControlName="secondCtrl" required>
+                </mat-form-field> -->
+                <div>
+                    <button mat-button >Calcular costo</button>
+                    <button mat-button color="primary">Guardar</button>
+                </div>
+            </form>
+            <section class="stepper-detail">
+                <h3>Resument de costo</h3>
+                <div>
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                        <ng-container matColumnDef="Concepto">
+                            <th mat-header-cell *matHeaderCellDef> Concepto </th>
+                            <td mat-cell *matCellDef="let element"> {{element.Concepto}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="KA">
+                            <th mat-header-cell *matHeaderCellDef> KA </th>
+                            <td mat-cell *matCellDef="let element"> {{element.KA}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="KC">
+                            <th mat-header-cell *matHeaderCellDef> KC </th>
+                            <td mat-cell *matCellDef="let element"> {{element.KC}} </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="total">
+                            <th mat-header-cell *matHeaderCellDef> total </th>
+                            <td mat-cell *matCellDef="let element"><strong>{{element.total}} </strong> </td>
+                        </ng-container>
+                        
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        
+                    </table>
+                </div>
+            </section>
+        </section>
+    </mat-step>
+    <!-- <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done.
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step> -->
+</mat-vertical-stepper>
+
+<router-outlet></router-outlet>

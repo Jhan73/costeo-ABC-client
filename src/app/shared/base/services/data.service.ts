@@ -9,4 +9,7 @@ export class DataService {
 
   constructor() { }
 
+  emitFormData(data: any) {
+    this.formData.emit(data);
+  }
 }

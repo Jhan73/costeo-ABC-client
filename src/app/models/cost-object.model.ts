@@ -1,7 +1,9 @@
 export interface CostObject {
-    id: number;
+    id?: number;
     name: string;
-    description: string;
+    cant: number;
+    code: string;
+    description?: string;
     cost?: number;
     state?: boolean;
     expenses?: number;
