@@ -3,5 +3,5 @@ export enum TABLE_ACTION {
     DELETE,
     SAVE,
     CANCEL,
-    CREATE,
+    CREATE
 }
